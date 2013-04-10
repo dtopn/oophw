@@ -37,7 +37,7 @@ Room* Room::get_near(int posi){
 }
 
 void Room::messg(){
-	cout << "you are in" << type << "choose where to go" << endl;
+	cout << "you are in " << type << posi_rank << posi_file << "\nchoose where to go" << endl;
 	for (int i = 0; i < MAXPOSI; i++){
 		if (nearpt[i]) cout << "door" << i << endl;
 	}
@@ -45,16 +45,38 @@ void Room::messg(){
 
 class lobbyRoom : public Room{
 public:
-	lobbyRoom(const int rank, const int file): Room(rank, file){printf("rank%dfile%d", posi_rank, posi_file);}
+	lobbyRoom(const int rank, const int file): Room(rank, file), type("Lobby"){printf("rank%dfile%d", posi_rank, posi_file);}
+private:
+	string type;
+};
+
+class prinRoom : public Room{
+public:
+	prinRoom(const int rank, const int file): Room(rank, file), type("Princess Room "){}
+private:
+	string type;
+};
+
+class monsRoom : public Room{
+public:
+	monsRoom(const int rank, const int file): Room(rank, file), type("Monster Room"){}
+private:
+	string type;
+};
+
+class wallRoom : public Room{
+public:
+	wallRoom(const int rank, const int file): Room(rank, file), type("Wall Room"){}
+private:
+	string type;
 };
 
 Room* createLabyrinth(int rank, int file){
 	Room *nowpt, *lobbypt, *prvpt, *uppt;
-	lobbypt = new Room(0, 0);std::cout << "\n";	//TODO lobbyRoom lobby(0, 0);
+	lobbypt = new lobbyRoom(0, 0);std::cout << "\n";
 	prvpt = lobbypt;
 	for(int i = 1; i < rank; i++ ){ // create first file
-		int j = 0;
-		nowpt = new Room(i, j);
+		nowpt = new Room(i, 0);
 		nowpt->set_near(prvpt, 2);
 		prvpt->set_near(nowpt, 3);
 		prvpt = nowpt;
@@ -65,17 +87,30 @@ Room* createLabyrinth(int rank, int file){
 		//TODO change cursor posi
 	}
 		//change pt for rank
-	prvpt = uppt = lobbypt;
-	for(int i = 0; i < rank; i++ ){ // create by file first
-		uppt = lobbypt->get_near(1);
+	prvpt = lobbypt;
+    for (int j = 1; j < file; j++) {
+        nowpt = new Room(0 ,j);
+        nowpt->set_near(prvpt, 0);
+		prvpt->set_near(nowpt, 1);
+		prvpt = nowpt;
+    }
+    
+	for(int i = 1; i < rank; i++ ){ // create by file first
 		int down = i;
-		while(down--) uppt->get_near(3); 
+        uppt = lobbypt->get_near(1);
+		while(--down) uppt->get_near(3);
+        down = i;
+        prvpt = lobbypt;
+        while (down--) prvpt = prvpt->get_near(3);
 		for (int j = 1; j < file; j++){
 			nowpt = new Room(i, j);
-			nowpt->set_near(prvpt, 0);prvpt->set_near(nowpt, 1);prvpt = nowpt;
-			std::cout << "\n";
-			if(i == 0) continue;
-			nowpt->set_near(uppt, 2);uppt->set_near(nowpt, 3);
+			nowpt->set_near(prvpt, 0);prvpt->set_near(nowpt, 1);
+//            if (j == 0   ) nowpt->set_near(0, 0);
+//            if (j == rank) nowpt->set_near(0, 1);
+//            if (i == 0   ) nowpt->set_near(0, 2);
+//            if (i == rank) nowpt->set_near(0, 3);
+            nowpt->set_near(uppt, 2);uppt->set_near(nowpt, 3);
+            prvpt = prvpt->get_near(1);
 			uppt = uppt->get_near(1);
 			std::cout << "\n"; //1 rank ok
 		}
@@ -107,7 +142,7 @@ Room* go_room(Room* nowpt, int direction){
 
 int main(int argc, char* argv[])
 {
-	sett.file[0] = sett.rank[0] = 8;
+	sett.file[0] = sett.rank[0] = 3;
 
 
 	std::default_random_engine generator;
@@ -115,15 +150,17 @@ int main(int argc, char* argv[])
 	int dice_roll = distribution(generator);
 	while(sett.file[1] == 0 && sett.rank[1] == 0)
 		sett.file[1] = distribution(generator) % sett.file[0];sett.rank[1] = distribution(generator) % sett.rank[0];
-	while((sett.file[2] == sett.file[1] && sett.rank[2] == sett.rank[1]) || (sett.file[2] == 0 && sett.rank[2] == 0))
+	while((sett.file[2] == sett.file[1] && sett.rank[2] == sett.rank[1]) 
+					|| (sett.file[2] == 0 && sett.rank[2] == 0))
 		sett.file[2] = distribution(generator) % sett.file[0];sett.rank[2] = distribution(generator) % sett.rank[0];
 
 
 	Room *nowpt = sett.lobby = createLabyrinth(sett.rank[0], sett.file[0]);
+    nowpt->messg();
 	while(sett.gameover == 0){
 		cout << "Choose a door\n";
         int buff; cin >> buff;
-        go_room(nowpt, buff);
+        nowpt = go_room(nowpt, buff);
         nowpt->messg();
 	}
 	if (sett.success == 0) {
