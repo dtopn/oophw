@@ -1,9 +1,11 @@
 #include <iostream>
 #include <string>
-#include <random>
+#include <cstdlib>
 #include <ctime>
 
 #define MAXPOSI 7
+
+#include "Room.h"
 
 using std::cout;
 using std::cin;
@@ -80,20 +82,27 @@ Room* go_room(Room* nowpt, int direction){
 	return nowpt->get_near(direction);
 }
 
+void setupgame(){
+    cout << "Enter ranks files you want to play" << endl;
+    cin >> sett.rank[0] >> sett.file[0];
+    
+    //C++ 11 #include <random>
+    //And replace rand() with distribution(generator)
+	//std::default_random_engine generator;
+	//std::uniform_int_distribution<int> distribution(1,time(0));
+	//int dice_roll = distribution(generator);
+    
+    srand ((int) time(NULL)); //concede for legacy compiler
+	while(sett.file[1] == 0 && sett.rank[1] == 0)
+		sett.file[1] = rand() % sett.file[0];sett.rank[1] = rand() % sett.rank[0];
+	while((sett.file[2] == sett.file[1] && sett.rank[2] == sett.rank[1])
+          || (sett.file[2] == 0 && sett.rank[2] == 0))
+		sett.file[2] = rand() % sett.file[0];sett.rank[2] = rand() % sett.rank[0];
+}
+
 int main(int argc, char* argv[])
 {
-	sett.file[0] = sett.rank[0] = 3;
-
-
-	std::default_random_engine generator;
-	std::uniform_int_distribution<int> distribution(1,time(0));
-	int dice_roll = distribution(generator);
-	while(sett.file[1] == 0 && sett.rank[1] == 0)
-		sett.file[1] = distribution(generator) % sett.file[0];sett.rank[1] = distribution(generator) % sett.rank[0];
-	while((sett.file[2] == sett.file[1] && sett.rank[2] == sett.rank[1]) 
-					|| (sett.file[2] == 0 && sett.rank[2] == 0))
-		sett.file[2] = distribution(generator) % sett.file[0];sett.rank[2] = distribution(generator) % sett.rank[0];
-
+    setupgame();
 
 	Room *nowpt = sett.lobby = createLabyrinth(sett.rank[0], sett.file[0]);
     nowpt->messg();
