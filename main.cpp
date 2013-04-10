@@ -69,12 +69,12 @@ struct settings{
 
 Room* go_room(int rank, int file){
 	Room *pt = sett.lobby;
-	for(int i = 0; i < rank; i++ ){ // create by file first
-		for (int j = 0; j < file; j++){
-			pt = pt->get_near(1);
-		}
-		pt = pt->get_near(3);
+	for(int i = 0; i < rank; i++ ){
+        pt = pt->get_near(3);
 	}
+    for (int j = 0; j < file; j++){
+        pt = pt->get_near(1);
+    }
 	return pt;
 }
 
@@ -82,8 +82,10 @@ Room* go_room(Room* nowpt, int direction){
 	return nowpt->get_near(direction);
 }
 
-void setupgame(){
-    cout << "Enter ranks files you want to play" << endl;
+
+int main(int argc, char* argv[])
+{
+    cout << "Enter ranks>3 files>3 you want to play" << endl;
     cin >> sett.rank[0] >> sett.file[0];
     
     //C++ 11 #include <random>
@@ -98,21 +100,30 @@ void setupgame(){
 	while((sett.file[2] == sett.file[1] && sett.rank[2] == sett.rank[1])
           || (sett.file[2] == 0 && sett.rank[2] == 0))
 		sett.file[2] = rand() % sett.file[0];sett.rank[2] = rand() % sett.rank[0];
-}
+    
+    Room *nowpt = sett.lobby = createLabyrinth(sett.rank[0], sett.file[0]);
+    sett.lobby = new lobbyRoom(0, 0);
+    sett.lobby->replace(nowpt, sett.lobby);
+    sett.monsroom = new monsRoom(sett.rank[1], sett.file[1]);
+    sett.monsroom->replace(go_room(sett.rank[1], sett.file[1]), sett.monsroom);
+    sett.prinroom = new prinRoom(sett.rank[2], sett.file[2]);
+    sett.prinroom->replace(go_room(sett.rank[2], sett.file[2]), sett.prinroom);
+    //sett.prinroom->replace();
 
-int main(int argc, char* argv[])
-{
-    setupgame();
-
-	Room *nowpt = sett.lobby = createLabyrinth(sett.rank[0], sett.file[0]);
+    sett.foundprin = sett.gameover = sett.success = 0;
+    
+    nowpt = sett.lobby;
     nowpt->messg();
 	while(sett.gameover == 0){
 		cout << "Choose a door\n";
         int buff; cin >> buff;
         nowpt = go_room(nowpt, buff);
+        if (nowpt == sett.prinroom) sett.foundprin = 1;
+        if (nowpt == sett.monsroom) sett.gameover  = 1;
+        if ((nowpt == sett.lobby) && sett.foundprin) sett.gameover = sett.success = 1;
         nowpt->messg();
 	}
-	if (sett.success == 0) {
+	if (sett.success == 1) {
         cout << "Princess is saved, and live with her white horse prince happily forever. How are about you my poor son? You've got nothing, go back to lab and brush your test tube." << endl;
     }
     else{

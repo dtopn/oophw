@@ -14,42 +14,52 @@ public:
 	//TODO assert(file >=2);
 	void set_near(Room *pt, int posi);
 	void messg();
+    void set_type(string type);
 	Room* get_near(int posi);
-    void set_type();
+    void replace(Room *rppt, Room *now);
 private:
-	Room *nearpt[MAXPOSI];//max 7 adjacent rooms
-	//regard 0 as left 1 as right 2 as up 3 as down
-	//more directions to be added 
-	string type;
 protected:
+    Room *nearpt[MAXPOSI];//max 7 adjacent rooms
+	//regard 0 as left 1 as right 2 as up 3 as down
+	//more directions to be added
 	int posi_rank, posi_file; 
-	//TODO constrcutor nearpt[]= {0 0 0 0 0 0 0} 
+	//TODO constrcutor nearpt[]= {0 0 0 0 0 0 0}
+    string type;
 };
 
-class lobbyRoom : public Room{
+class replaceRoom: public Room{
 public:
-	lobbyRoom(const int rank, const int file): Room(rank, file), type("Lobby"){printf("rank%dfile%d", posi_rank, posi_file);}
+    replaceRoom(const int rank, const int file): Room(rank, file){};
+    //TODO ASK QUES?
+    void replace();
+};
+
+class lobbyRoom : public replaceRoom{
+public:
+    using replaceRoom::replace;
+	lobbyRoom(const int rank, const int file): replaceRoom(rank, file){set_type("Lobby");}
+    void messg();
 private:
 	string type;
 };
 
-class prinRoom : public Room{
+class prinRoom : public replaceRoom{
 public:
-	prinRoom(const int rank, const int file): Room(rank, file), type("Princess Room "){}
+    prinRoom(const int rank, const int file): replaceRoom(rank, file){set_type("Princess Room");}
 private:
 	string type;
 };
 
-class monsRoom : public Room{
+class monsRoom : public replaceRoom{
 public:
-	monsRoom(const int rank, const int file): Room(rank, file), type("Monster Room"){}
+	monsRoom(const int rank, const int file): replaceRoom(rank, file){set_type("Monster Room");}
 private:
 	string type;
 };
 
-class wallRoom : public Room{
+class wallRoom : public replaceRoom{
 public:
-	wallRoom(const int rank, const int file): Room(rank, file), type("Wall Room"){}
+	wallRoom(const int rank, const int file): replaceRoom(rank, file), type("Wall Room"){}
 private:
 	string type;
 };
