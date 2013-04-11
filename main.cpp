@@ -15,7 +15,7 @@ using std::string;
 
 Room* createLabyrinth(int rank, int file){
 	Room *nowpt, *lobbypt, *prvpt, *uppt;
-	lobbypt = new lobbyRoom(0, 0);std::cout << "\n";
+	lobbypt = new lobbyRoom(0, 0);//std::cout << "\n";
 	prvpt = lobbypt;
 	for(int i = 1; i < rank; i++ ){ // create first file
 		nowpt = new Room(i, 0);
@@ -25,7 +25,7 @@ Room* createLabyrinth(int rank, int file){
 		//pt->set_up(
 		//pt->set_right(
 		//pt->set_down(
-		std::cout << "\n"; //1st file ok
+		//std::cout << "\n"; //1st file ok
 		//TODO change cursor posi
 	}
 		//change pt for rank
@@ -54,7 +54,7 @@ Room* createLabyrinth(int rank, int file){
             nowpt->set_near(uppt, 2);uppt->set_near(nowpt, 3);
             prvpt = prvpt->get_near(1);
 			uppt = uppt->get_near(1);
-			std::cout << "\n"; //1 rank ok
+			//std::cout << "\n"; //1 rank ok
 		}
 		//change pt for rank
 	}
