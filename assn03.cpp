@@ -159,7 +159,7 @@ int main(int argc, char* argv[])
 	Room *nowpt = sett.lobby = createLabyrinth(sett.rank[0], sett.file[0]);
     nowpt->messg();
 	while(sett.gameover == 0){
-		cout << "Choose a door\n";
+		cout << "Choose a door\nGoto door:";
         int buff; cin >> buff;
         nowpt = go_room(nowpt, buff);
         nowpt->messg();

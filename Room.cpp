@@ -15,7 +15,7 @@ void Room::messg(){
 	}
 }
 
-void Room::set_type(std::__1::string a){
+void Room::set_type(std::string a){
     type = a;
 }
 
