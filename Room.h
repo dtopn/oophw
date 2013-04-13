@@ -10,7 +10,8 @@ using std::string;
 
 class Room{
 public:
-	Room(const int rank, const int file):posi_rank(rank), posi_file(file){/*printf("rank%dfile%d", posi_rank, posi_file);*/}
+	Room(const int rank, const int file):posi_rank(rank), posi_file(file){/*printf("rank%dfile%d", posi_rank, posi_file);*/
+	for (int i = 0; i < MAXPOSI; i++)	nearpt[i] = 0;}
 	//TODO assert(file >=2);
 	void set_near(Room *pt, int posi);
 	void messg();
