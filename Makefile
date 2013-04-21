@@ -1,7 +1,7 @@
 #ifeq($(PROCESSOR_ARCHITECTURE), AMD64)
 #DEBUG := 1
 #BASE	= ./
-CC 	= clang++
+CC 	= g++
 CFLAGS 	= -c -Wall
 #LDFLAGS =
 EXECUTABLE = assn03
