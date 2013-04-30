@@ -1,27 +1,19 @@
 oophw
 =====
 
-Assignment 003: Adventure
+Assignment 004: Personal Dairy
 
-marks:3, max size:200kB, due date:130413,status: not submitted
-Story
+marks:15, max size:1000kB, due date:130511,status: not submitted
+The Personal Diary is a CLI (Command Line Interface) software, consists of three programs:
 
-Adventure is a CLI game. The player has to explore in the castle with many levels and a lot of rooms. The task of the player is to find a room where the princess is prinsoned and take her leave the castle. There are many types of rooms, and each type of room has different types of exits. Note that there's a monster in one of the rooms, which the exact location is not able to be aware. But once the player meets a monster, the game is over.
-
-When the game starts, the player is at the lobby of the castle. Then the program shows information about the lobby：name of the room, how many exits are there, and names of all exits (e.g.: "east", "south", "up"), like:
-
-	Welcome to the lobby. There are 3 exits as: east, west and up.
-	Enter your command:
-The player then can input "go" followed by the name of one exit to enter the room connected with that door, like:
-	go east
-The player goes into the room to the east. The program shows the information about that room, like what happened in the lobby just now. And the player may input command to choose another room.
-Once the player enters a room with a monster, the program shows a message and game over. Once the player enters the room of princess, the program shows a message about the princess, and the process is going to leave with the player. The player then has to find their way out the castle. The only way to leave the castle is via the lobby.
-
-All printed messages and user input are in English to simplify the code.
-
-Requirement
-
-At least three different kinds of room;
-At least five rooms;
-The room with monster or princess is randomly set.
+pdadd 
+pdlist [ ]
+pdshow 
+pdremove 
+pdadd is used to add an entity into the diary for the date. If an entity of the same date is in the diary, the existing one will be replaced. pdadd reads lines of the diary from the stdin, line by line, until a line with single '.' character or the EOF character (Ctrl-D in Unix and Ctrl- Z in Windows).
+pdlist lists all entities in the diary ordered by date. If start and end date are provided through command line parameters, it lists entities between start and end only. This program lists to the stdout.
+pdshow prints the content of the entity specified by the date to the stdout. 
+pdremove removes one entity of the date. It returns 0 at success and -1 at failure.
+The software stores diary in one data file, reads to the memory at begining of each program and stores back to the file at the end of process.
+Common classes and functions should be shared between programs. No interactive is permitted, so these programs are able to work together by the means of redirection or tee, are able to be used in a shell script.
 
