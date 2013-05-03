@@ -16,7 +16,7 @@ long int queLheure() {
 	return conLheure(yyyymmddc);    
 }
 
-long int conLheure(char* yyyymmddc) {
+long int conLheure(const char* yyyymmddc) {
 	//convert to long int
     string  yyyymmdds = yyyymmddc;
     istringstream strstrm(yyyymmdds);
