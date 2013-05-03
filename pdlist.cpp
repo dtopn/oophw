@@ -9,7 +9,7 @@ int main (int argc, const char * argv[] ) {
 	iparse (da);
     
 	if ( argc != 1 && argc != 3) {
-        ostd("wrong command\n");
+        ostd("Wrong command\n");
         exit(1);
     }
     DAT::const_iterator map_begin = da.begin();
@@ -18,7 +18,7 @@ int main (int argc, const char * argv[] ) {
     if ( argc == 3 ) {
     	long int day1, day2;
         if ( (strlen(argv[1]) != 10) && (strlen(argv[2]) != 10) ) {
-            ostd("illeagal date\n");
+            ostd("Illeagal date\n");
             exit(1);
         }
         
@@ -44,8 +44,8 @@ int main (int argc, const char * argv[] ) {
     while (map_i != map_end) {
         ostd(map_i->first);
         ostd("\n");
-        ostd(map_i->second);
-        ostd("\n");
+        
+        
         map_i ++;
     }
     return 0;
