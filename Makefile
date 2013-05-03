@@ -1,11 +1,10 @@
 #ifeq($(PROCESSOR_ARCHITECTURE), AMD64)
 #DEBUG := 1
 #BASE	= ./
-#CC 	= clang++
-CC = cl
+CC 	= g++
 CFLAGS 	= -c -Wall
 #LDFLAGS =
-EXECUTABLE = assn03
+EXECUTABLE = pdadd pdremove pdshow
 
 #LOC	= ./
 OBJS 	= main.o Room.o 
