@@ -3,6 +3,7 @@
 #BASE	= ./
 CC 	= g++
 CFLAGS 	= -c -Wall
+<<<<<<< HEAD
 LDFLAGS =
 
 EXEC = pdadd pdremove pdshow pdlist
@@ -43,3 +44,23 @@ pdshow:
 
 clean:
 	$(RM) *.o a.out $(TARGETS) 
+=======
+#LDFLAGS =
+EXECUTABLE = assn02
+
+#LOC	= ./
+OBJS 	= assn02.o LinkedList.o ListNode.o Student.o Class.o Course.o
+
+#CFLAGS	+= -g
+
+#all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJS)     
+	$(CC) -o $(EXECUTABLE) $(OBJS)
+	
+
+#endif
+
+clean:
+	rm *.o
+>>>>>>> assn02
