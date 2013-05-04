@@ -25,16 +25,20 @@ int main (int argc, const char * argv[] ) {
         day1 = conLheure(argv[1]);
         day2 = conLheure(argv[2]);
         if (day1 > day2) {
-            day1 ^= day2 ^= day1 ^= day2;
+            int long temp;
+            temp = day1, day1 = day2, day2 = temp;
+            //day1 ^= day2 ^= day1 ^= day2 ^= day1;
         }
 
         map_i = map_begin;
-        while ( map_i->first > day1 && (map_i != map_end) ) {
+        
+        while ( map_i->first < day1 && (map_i != map_end) ) {
             map_i++;
         }
+        //ostd(map_i->first);
         ///Users/yuanzhanghao/Nutstore/wkspace/oophw/pdlist.cpp:36:45: Invalid operands to binary expression ('DAT::const_iterator' (aka '__map_const_iterator<typename __base::const_iterator>') and 'DAT::const_iterator')
         map_begin = map_i;
-        while (map_i->first < day2 && map_i != map_end) {
+        while (map_i->first <= day2 && map_i != map_end) {
             map_i++;
         }
         map_end = map_i;

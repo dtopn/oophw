@@ -20,7 +20,6 @@ int main (int argc, const char * argv[] ) {
     long int day = conLheure(argv[1]);
     
     DAT::const_iterator map_i;
-    ostd(day);
     map_i = da.find((DAT::key_type) day);
     if (map_i == da.end()) {
         ostd("No such entry.\n");

@@ -3,21 +3,43 @@
 #BASE	= ./
 CC 	= g++
 CFLAGS 	= -c -Wall
-#LDFLAGS =
-EXECUTABLE = pdadd pdremove pdshow
+LDFLAGS =
 
-#LOC	= ./
-OBJS 	= main.o Room.o 
+EXEC = pdadd pdremove pdshow pdlist
+DEPEND := heure.cpp datio.cpp
 
+EXEC = $(SRC: .cpp= ) 
+OBJS = heure.o datio.o  
+OBJS +=
+
+OBJDIR	= ./obj
 #CFLAGS	+= -g
 
-#all: $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJS)     
-	$(CC) -o $(EXECUTABLE) $(OBJS)
+#.PHONY: clean all
+
+all: $(EXEC)
+
+pdadd:
+	$(CC) -o pdadd pdadd.o $(OBJS)
+
+pdlist:
+	$(CC) -o pdlist pdlist.o $(OBJS)
+
+pdremove:
+	$(CC) -o pdremove pdremove.o $(OBJS)
+
+pdshow:
+	$(CC) -o pdshow pdshow.o $(OBJS)
+
+#$(EXEC):
+#	$(CC) -o $(EXEC) $(OBJS)
 	
+#$(EXEC):
+#	$(foreach var, $(EXEC), $(CC) $(CFLAGS) -o $(var) $(var).cpp;)
 
-#endif
+#.cpp.o:
+	$(CC) $(CFLAGS) $< -o $(OJRDIR)$@
 
 clean:
-	rm *.o
+	$(RM) *.o a.out $(TARGETS) 
