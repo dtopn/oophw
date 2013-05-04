@@ -10,9 +10,8 @@ int main (int argc, char **agrv){
     long int time = queLheure();
     
     char buffc, buff1, buff2;
-    int flag = 0;
     buffc = getchar(); buff1 = buff2 = '\n';
-    while (buffc != EOF) {
+    while (buffc != EOF && buffc != '\x04') {
         todays += buffc;
         
         if (buff1 == '\n' && buffc == '\n' && buff2 == '.') {

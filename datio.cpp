@@ -60,7 +60,7 @@ int oparse (DAT da) {
 	ofstream fout ("dat");
     DAT::const_iterator map_i = da.begin();
 	while (map_i != da.end()) {
-        fout << map_i->first << endl
+        fout << map_i->first
             << map_i->second << '\x1f';
         map_i++;
     }

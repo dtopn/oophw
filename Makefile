@@ -2,16 +2,14 @@
 #DEBUG := 1
 #BASE	= ./
 CC 	= g++
-CFLAGS 	= -c -Wall
-<<<<<<< HEAD
+CFLAGS 	= -c #-Wall
 LDFLAGS =
 
 EXEC = pdadd pdremove pdshow pdlist
-DEPEND := heure.cpp datio.cpp
-
-EXEC = $(SRC: .cpp= ) 
-OBJS = heure.o datio.o  
-OBJS +=
+DEPEND := heure datio
+OBJS = heure.o datio.o
+OBJRC = $(OBJS: .o=.cpp)
+#OBJS +=
 
 OBJDIR	= ./obj
 #CFLAGS	+= -g
@@ -19,19 +17,28 @@ OBJDIR	= ./obj
 
 #.PHONY: clean all
 
-all: $(EXEC)
+all: 00
+	$(foreach var, $(EXEC), $(CC) $(LDFLAGS) -o $(var) $(var).o $(OBJS);)
 
-pdadd:
-	$(CC) -o pdadd pdadd.o $(OBJS)
+00: 01
+	$(foreach var, $(EXEC) , $(CC) $(CFLAGS) -o $(var).o $(var).cpp $(OBJRC);)
 
-pdlist:
-	$(CC) -o pdlist pdlist.o $(OBJS)
+01:
+	$(foreach var, $(DEPEND) , $(CC) $(CFLAGS) -o $(var).o $(var).cpp;)
 
-pdremove:
-	$(CC) -o pdremove pdremove.o $(OBJS)
 
-pdshow:
-	$(CC) -o pdshow pdshow.o $(OBJS)
+
+#pdadd:
+#	$(CC) -o pdadd pdadd.o $(OBJS)
+
+#pdlist:
+#	$(CC) -o pdlist pdlist.o $(OBJS)
+
+#pdremove:
+#	$(CC) -o pdremove pdremove.o $(OBJS)
+
+#pdshow:
+#	$(CC) -o pdshow pdshow.o $(OBJS)
 
 #$(EXEC):
 #	$(CC) -o $(EXEC) $(OBJS)
@@ -40,27 +47,7 @@ pdshow:
 #	$(foreach var, $(EXEC), $(CC) $(CFLAGS) -o $(var) $(var).cpp;)
 
 #.cpp.o:
-	$(CC) $(CFLAGS) $< -o $(OJRDIR)$@
+#	$(CC) $(CFLAGS) $< -o $(OJRDIR)$@
 
 clean:
 	$(RM) *.o a.out $(TARGETS) 
-=======
-#LDFLAGS =
-EXECUTABLE = assn02
-
-#LOC	= ./
-OBJS 	= assn02.o LinkedList.o ListNode.o Student.o Class.o Course.o
-
-#CFLAGS	+= -g
-
-#all: $(EXECUTABLE)
-
-$(EXECUTABLE): $(OBJS)     
-	$(CC) -o $(EXECUTABLE) $(OBJS)
-	
-
-#endif
-
-clean:
-	rm *.o
->>>>>>> assn02

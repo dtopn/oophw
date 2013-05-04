@@ -1,6 +1,6 @@
 #include "datio.h"
 #include "heure.h"
-
+#include <map>
 #include <string>
 using namespace std;
 
@@ -25,8 +25,9 @@ int main (int argc, const char * argv[] ) {
         ostd("No such entry.\n");
         exit(-1);
     }
-    
-    da.erase(map_i);
-    oparse(da);
-    return 0;
+    else {
+        da.erase(map_i->first);
+        oparse(da);
+        return 0;
+    }
 }
