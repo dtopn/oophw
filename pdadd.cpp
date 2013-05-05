@@ -2,12 +2,23 @@
 #include "heure.h"
 
 using namespace std;
-int main (int argc, char **agrv){
+int main (int argc, const char * argv[] ) {
     DAT da;
-	iparse (da);    
+	iparse (da);
+    
+	if ( argc != 2) {
+        ostd("Wrong command\n");
+        exit(1);
+    }
+    if ( (strlen(argv[1]) != 10) ) {
+        ostd("Illeagal date\nEnter yyyy/mm/dd\n");
+        exit(1);
+    }
+    
+    long int time = conLheure(argv[1]);
     
     string todays;
-    long int time = queLheure();
+//    long int time = queLheure();
     
     char buffc, buff1, buff2;
     buffc = getchar(); buff1 = buff2 = '\n';
