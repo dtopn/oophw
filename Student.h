@@ -1,7 +1,10 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include "LinkedList.h"
+#include <list>
+using std::list;
+//#include "LinkedList.h"
+
 #include "Course.h"
 
 #include <string>
@@ -18,7 +21,7 @@ private:
     int course_no, score_sum;
     std::string name;
     float average;
-    LinkedList<Course> hisCourseList;
+    list<Course> hisCourseList;
 };
 
 #endif //STUDENT_H

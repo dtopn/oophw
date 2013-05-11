@@ -4,10 +4,10 @@
 CC 	= g++
 CFLAGS 	= -c -Wall
 #LDFLAGS =
-EXECUTABLE = assn02
+EXECUTABLE = assn05
 
 #LOC	= ./
-OBJS 	= assn02.o LinkedList.o ListNode.o Student.o Class.o Course.o
+OBJS 	= assn05.o Student.o Class.o Course.o
 
 #CFLAGS	+= -g
 

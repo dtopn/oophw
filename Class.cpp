@@ -23,7 +23,8 @@ void Class::input_info(){
 		//hisStuList.add(*p);
 		Student temp(buff);
 		temp.input_info();
-		hisStuList.add(temp);
+        hisStuList.push_back(temp);
+        //		hisStuList.add(temp);
     }
     else{
         cout << "Illeagal Input, return to main menu." << endl;
@@ -31,11 +32,16 @@ void Class::input_info(){
 }
 
 void Class::print_info(){
-	ListNode<Student> *p = hisStuList.getHead();
-	hisStuList.getHead()->read_info().print_info();
-	while ((p = hisStuList.getNext(p))){
-		p->read_info().print_info();
+	list<Student>::iterator iter = hisStuList.begin();
+	//ListNode<Student> *p = hisStuList.getHead();
+	//hisStuList.getHead()->read_info().print_info();
+	while (iter != hisStuList.end() ) {
+		iter->print_info();
+		iter++;
 	}
+//	while ((p = hisStuList.getNext(p))){
+//		p->read_info().print_info();
+//	}
 }
 
 //int Class::get_info(int course_no){

@@ -1,7 +1,9 @@
 #ifndef CLASS_H
 #define CLASS_H
 
-#include "LinkedList.h"
+#include <list>
+using std::list;
+//#include "LinkedList.h"
 #include "Student.h"
 
 class Class{
@@ -12,7 +14,7 @@ public:
     void print_info();
 	//void input_course();
 private:
-    LinkedList<Student> hisStuList;
+    list<Student> hisStuList;
 };
 
 #endif //CLASS_H

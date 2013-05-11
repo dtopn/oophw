@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 
 #include "Student.h"
 
@@ -30,7 +31,8 @@ void Student::input_info(){
 			ibuff <= 5 && ibuff >= 0 ) {
 			Course *p = new Course(sbuff, ibuff);
 			//Course input(buff, itemp);
-			hisCourseList.add(*p);
+            hisCourseList.push_back(*p);
+			//hisCourseList.add(*p);
 			course_no ++, score_sum += ibuff;
 			average = score_sum / course_no;
 		}
@@ -52,11 +54,16 @@ void Student::print_info(){
     //cout.setf(ios::left);
     //cout << no << score1 << score2 << score3 << endl;
     cout << name << "\t" << " average:" << average << "\t";
-	ListNode<Course> *p = hisCourseList.getHead();
-	hisCourseList.getHead()->read_info().print_info();
-	while ((p = hisCourseList.getNext(p))){
-		p->read_info().print_info();
+	list<Course>::iterator iter = hisCourseList.begin();
+    //ListNode<Course> *p = hisCourseList.getHead();
+    //hisCourseList.getHead()->read_info().print_info();
+	while (iter != hisCourseList.end()){
+		iter->print_info();
+        iter++;
 	}
+//    while ((p = hisCourseList.getNext(p))){
+//		p->read_info().print_info();
+//	}
 	std::cout << endl;
 }
 //int Student::get_info(int course_no){
