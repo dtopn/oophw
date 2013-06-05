@@ -4,10 +4,10 @@
 CXX	= g++
 CFLAGS 	= -c -Wall
 #LDFLAGS =
-EXECUTABLE = assn06
+EXECUTABLE = assn07
 
 #LOC	= ./
-OBJS 	= assn06.o Fraction.o
+OBJS 	= assn07.o Vector.o
 
 #CFLAGS	+= -g
 
