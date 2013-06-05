@@ -1,21 +1,29 @@
 #ifeq($(PROCESSOR_ARCHITECTURE), AMD64)
 #DEBUG := 1
 #BASE	= ./
-CC 	= g++
+CXX	= g++
 CFLAGS 	= -c -Wall
 #LDFLAGS =
-EXECUTABLE = assn05
+EXECUTABLE = assn07
 
 #LOC	= ./
-OBJS 	= assn05.o Student.o Class.o Course.o
+OBJS 	= assn07.o Vector.o
 
 #CFLAGS	+= -g
 
-#all: $(EXECUTABLE)
+all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJS)     
-	$(CC) -o $(EXECUTABLE) $(OBJS)
+	$(CXX) -o $(EXECUTABLE) $(OBJS)
+
+#assn06: Fraction.o assn06.o
+#	g++ -o assn06 assn06.o Fraction.o
 	
+#Fraction.o:
+#	g++ -c -o Fraction.o Fraction.cpp
+	
+#assn06.o:
+#	g++ -c -o assn06.o assn06.cpp
 
 #endif
 
