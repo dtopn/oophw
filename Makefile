@@ -28,4 +28,4 @@ $(EXECUTABLE): $(OBJS)
 #endif
 
 clean:
-	rm *.o
+	rm *.o $(EXECUTABLE)
