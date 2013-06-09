@@ -5,6 +5,6 @@
 using std::cerr;
 
 void IndexOutofBounds::diagnostic() {
-	cerr << "index " << m_badValue
-		<< "out of range!"; 
+	cerr << "Index " << m_badValue
+		<< " out of range"; 
 }

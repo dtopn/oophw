@@ -9,7 +9,7 @@ EXECUTABLE = assn07
 #LOC	= ./
 OBJS 	= assn07.o Vector.o
 
-#CFLAGS	+= -g
+CFLAGS	+= -g
 
 all: $(EXECUTABLE)
 
