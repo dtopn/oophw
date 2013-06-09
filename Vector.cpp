@@ -35,6 +35,20 @@ Vector<T>::Vector (const Vector& r) {
 };
 
 template <typename T>
+T& operator[](int index): throw(IndexOutofBounds) {
+	try {
+		if (index < 0 || index > m_nSize)
+		throw excep;
+		else {
+			return *(m_pElements + index);
+		}
+	}
+	catch (exception &ex) {
+		cout << "Index out of bound\n";
+	}
+}
+
+template <typename T>
 int Vector<T>::size() {
 	return m_nSize;
 }
